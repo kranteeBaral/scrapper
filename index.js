@@ -1,38 +1,33 @@
-const PORT = 8000;
-const URL = "https://www.google.com/maps/search/hotels+in+pokhara/@28.207006,83.921482,13z/data=!4m2!2m1!6e3?entry=ttu";
+const puppeteer = require('puppeteer');
 
-const axios = require('axios')
-const cheerio = require('cheerio')
-const express = require('express')
+(async () => {
+  // Launch the browser and open a new blank page
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
 
-const app = express()
+  // Navigate the page to a URL
+  await page.goto('https://www.google.com/maps/search/hotels+in+pokhara/@28.1428736,84.1857381,9.55z');
 
+  await page.screenshot({path: "example.png"})
+  // Set screen size
+  await page.setViewport({width: 1300, height: 1200});
 
-// axios(URL).then(response => {
-//     const html = response.data;
-//     const $ = cheerio.load(html);
-//     console.log(html);
-//     const listOfHotels = [];
-//     $('.TFQHme', html).each(function() {
-//         // const name = $(this).find('a').attr('aria-label');
-//         const detail = $(this).find('a').attr('href');
-//         listOfHotels.push({ detail})
-//     })
-//     console.log('The list of hotels ', listOfHotels);
+  // Type into search box
+  // await page.type('.devsite-search-field', 'automate beyond recorder');
 
+  // Wait and click on first result
+  // const searchResultSelector = '.devsite-result-item-link';
+  // await page.waitForSelector(searchResultSelector);
+  // await page.click(searchResultSelector);
 
-    // $('.dcr-jfeohd').attr(href)
-    // const newsArray = [];
-    // $('.dcr-16c50tn', html).each(function(){
-    //     const newsTitle = $(this).text();
-    //     const link = $(this).find('a').attr('href');
-    //     newsArray.push({newsTitle, link})
-    // })
-    // console.log(newsArray);   
+  // Locate the full title with a unique string
+  // const textSelector = await page.waitForSelector(
+  //   'text/Customize and automate'
+  // );
+  // const fullTitle = await textSelector?.evaluate(el => el.textContent);
 
+  // Print the full title
+  // console.log('The title of this blog post is "%s".', fullTitle);
 
-// }).catch(error => console.log(`Error occurred: ${error}`))
-
-app.listen(PORT, () => {console.log(`Server running on PORT: ${PORT}`)})
-
-
+  await browser.close();
+})();

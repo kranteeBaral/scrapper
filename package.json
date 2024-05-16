@@ -4,7 +4,7 @@
   "description": "Web scrapper to scrape off hotels data in Pokhara. Built with Node Js'",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "keywords": [
     "Web",
